@@ -42,7 +42,6 @@ public class ScrollTopFixActivity extends AppCompatActivity implements AppBarLay
         transY = getResources().getDimension(R.dimen.trans_y);
         transY2 = getResources().getDimension(R.dimen.trans_y2);
 
-
         appBarLayout = findViewById(R.id.app_bar);
         content = findViewById(R.id.app_bar_content);
         title = findViewById(R.id.title);

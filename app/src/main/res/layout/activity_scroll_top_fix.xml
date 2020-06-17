@@ -10,8 +10,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@android:color/white"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+        android:background="@android:color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/app_bar_content"
