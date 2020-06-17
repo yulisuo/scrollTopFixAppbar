@@ -19,10 +19,10 @@ public class ScrollTopFixActivity extends AppCompatActivity implements AppBarLay
 
     private static final String TAG = "scroll_top_fix";
     RecyclerView rv;
-    ViewGroup content;
+    ViewGroup content, bottomBanner;
     AppBarLayout appBarLayout;
     AppCompatTextView title, subTitle;
-    float minHeight, transY, transY2;
+    float minHeight, transY, transY2, bottomBannerTransY;
     int maxOffset;
     int count = 20;
 
@@ -41,11 +41,13 @@ public class ScrollTopFixActivity extends AppCompatActivity implements AppBarLay
         minHeight = getResources().getDimension(R.dimen.content_min_height);
         transY = getResources().getDimension(R.dimen.trans_y);
         transY2 = getResources().getDimension(R.dimen.trans_y2);
+        bottomBannerTransY = getResources().getDimension(R.dimen.bottom_banner_height);
 
         appBarLayout = findViewById(R.id.app_bar);
         content = findViewById(R.id.app_bar_content);
         title = findViewById(R.id.title);
         subTitle = findViewById(R.id.subtitle);
+        bottomBanner = findViewById(R.id.bottom_banner);
 
         appBarLayout.addOnOffsetChangedListener(this);
     }
@@ -57,7 +59,7 @@ public class ScrollTopFixActivity extends AppCompatActivity implements AppBarLay
             maxOffset = (int) (minHeight - appBarLayout.getHeight());
         }
         float progress = 1f - Math.abs(verticalOffset * 1f / maxOffset);
-        log("progress:%s", progress);
+//        log("progress:%s", progress);
         float scale = 1f + 0.5f * progress;
 
         title.setTranslationY(progress * transY);
@@ -67,6 +69,12 @@ public class ScrollTopFixActivity extends AppCompatActivity implements AppBarLay
         subTitle.setTranslationY(progress * transY2);
         subTitle.setScaleX(scale);
         subTitle.setScaleY(scale);
+
+
+        bottomBanner.setTranslationY(progress * bottomBannerTransY);
+        bottomBanner.setAlpha(1 - progress);
+
+        log("rv bottom:%s, progress:%s", rv.getBottom(), progress);
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
